@@ -8,7 +8,6 @@ import {
   useMotionValueEvent,
 } from "framer-motion";
 import { Button } from "../button";
-import { v4 as uuidv4 } from "uuid";
 
 export const Carousel = () => {
   const { width, height } = useWindowSize();
@@ -122,16 +121,15 @@ export const Carousel = () => {
   );
 };
 
-
 const SmallCarousel = ({ anime }: { anime: Anime[] }) => {
   return (
     <div className="overflow-clip">
       <div className="animate-carousel-move relative left-[var(--carousel-offset,0px)] flex gap-3">
         {/* Original set */}
-        {anime.map((anime) => (
+        {anime.map((anime, index) => (
           <div
             className="aspect-video w-[40vw] shrink-0 md:w-[23vw]"
-            key={uuidv4()}
+            key={`${anime.name}-${index}`}
           >
             <img
               className="h-full w-full rounded-xl object-cover"
@@ -141,10 +139,10 @@ const SmallCarousel = ({ anime }: { anime: Anime[] }) => {
           </div>
         ))}
         {/* Duplicated set for seamless loop */}
-        {anime.map((anime) => (
+        {anime.map((anime, index) => (
           <div
             className="aspect-video w-[40vw] shrink-0 md:w-[23vw]"
-            key={uuidv4()}
+            key={`${anime.name}-${index}-duplicated`}
           >
             <img
               className="h-full w-full rounded-xl object-cover"
